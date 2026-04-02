@@ -13,7 +13,6 @@ namespace RkdTimerAddIn
         private bool timerActiveForCurrentSlide = false;
         private PowerPoint.Shape hiddenAnchorShape = null;
 
-
         private void RestoreHiddenAnchor()
         {
             if (hiddenAnchorShape != null)
@@ -22,6 +21,7 @@ namespace RkdTimerAddIn
                 hiddenAnchorShape = null;
             }
         }
+
         private void ThisAddIn_Startup(object sender, EventArgs e)
         {
             Application.SlideShowBegin += OnSlideShowBegin;
@@ -29,7 +29,7 @@ namespace RkdTimerAddIn
             Application.SlideShowEnd += OnSlideShowEnd;
 
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = 1000;
+            timer.Interval = 50;
             timer.Tick += UpdateTimer;
         }
 
@@ -94,7 +94,7 @@ namespace RkdTimerAddIn
                 slideStart = DateTime.Now;
                 timerActiveForCurrentSlide = true;
 
-                form.UpdateTime("00:00:00", false);
+                form.UpdateProgress(1.0f, null);
 
                 var pptWindow = new WindowWrapper((IntPtr)Wn.HWND);
                 form.Show(pptWindow);
@@ -104,19 +104,27 @@ namespace RkdTimerAddIn
             }
         }
 
-
         private void UpdateTimer(object sender, EventArgs e)
         {
             if (!timerActiveForCurrentSlide || form == null || form.IsDisposed || !form.IsHandleCreated)
                 return;
 
             var elapsed = DateTime.Now - slideStart;
-            string text = elapsed.ToString(@"hh\:mm\:ss");
-            bool warning = elapsed.TotalSeconds >= currentWarningSeconds;
+            double elapsedSeconds = elapsed.TotalSeconds;
 
             try
             {
-                form.UpdateTime(text, warning);
+                if (elapsedSeconds <= currentWarningSeconds)
+                {
+                    float progress = 1.0f - (float)(elapsedSeconds / currentWarningSeconds);
+                    form.UpdateProgress(progress, null);
+                }
+                else
+                {
+                    TimeSpan excess = TimeSpan.FromSeconds(elapsedSeconds - currentWarningSeconds);
+                    string excessText = excess.ToString(@"hh\:mm\:ss");
+                    form.UpdateProgress(0f, excessText);
+                }
             }
             catch { }
         }

@@ -33,7 +33,7 @@ namespace RkdTimerAddIn
                 anchor.Line.DashStyle = MsoLineDashStyle.msoLineDash;
                 anchor.Line.ForeColor.RGB = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
 
-                anchor.TextFrame.TextRange.Text = "Rkd Timer Area (Resize as desired)";
+                anchor.TextFrame.TextRange.Text = "Rkd Health Bar Area (Resize as desired)";
                 anchor.TextFrame.TextRange.Font.Color.RGB = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Gray);
                 anchor.TextFrame.TextRange.Font.Size = 12;
             }

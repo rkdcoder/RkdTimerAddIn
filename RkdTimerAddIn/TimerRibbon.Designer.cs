@@ -2,9 +2,6 @@
 {
     partial class TimerRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         public TimerRibbon()
@@ -13,10 +10,6 @@
             InitializeComponent();
         }
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -28,10 +21,6 @@
 
         #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.tab1 = this.Factory.CreateRibbonTab();
@@ -58,7 +47,7 @@
             // 
             // editSecondsToRed
             // 
-            this.editSecondsToRed.Label = "Seconds to Red:";
+            this.editSecondsToRed.Label = "Total Seconds:";
             this.editSecondsToRed.Name = "editSecondsToRed";
             this.editSecondsToRed.Text = null;
             // 
@@ -66,7 +55,7 @@
             // 
             this.btnInsertTimer.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.btnInsertTimer.Image = global::RkdTimerAddIn.Properties.Resources.RkdTimer;
-            this.btnInsertTimer.Label = "Insert Timer";
+            this.btnInsertTimer.Label = "Insert Bar";
             this.btnInsertTimer.Name = "btnInsertTimer";
             this.btnInsertTimer.ShowImage = true;
             this.btnInsertTimer.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnInsertTimer_Click);
